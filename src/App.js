@@ -3,6 +3,7 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import ArcGISMap from "@arcgis/core/Map";
 import DictionaryRenderer from "@arcgis/core/renderers/DictionaryRenderer";
 import MapView from "@arcgis/core/views/MapView";
+import watchUtils from '@arcgis/core/core/watchUtils';
 
 import "./App.css";
 
@@ -30,6 +31,10 @@ function App() {
           ymax: 4436367,
           ymin: 4435053,
         },
+      });
+
+      watchUtils.whenEqualOnce(view, 'loadStatus', 'loaded', function() {
+        console.log(view);
       });
 
       const popupTemplate = {
